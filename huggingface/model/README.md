@@ -1,6 +1,6 @@
 ---
 library_name: pytorch
-pipeline_tag: molecule-generation
+pipeline_tag: other
 tags:
   - flow-matching
   - structure-based-drug-design
