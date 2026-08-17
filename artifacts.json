@@ -38,5 +38,22 @@
       "size": 572104,
       "sha256": "aa0b366a4796f6c72e6283f4ca6cdfe2acfdb0022a0d9d1b3af633285694b897"
     }
+  ],
+  "crossdocked_repo_files": [
+    {
+      "path": "data/crossdocked_pocket10_with_protein.tar.gz",
+      "size": 3631120248,
+      "sha256": "30290c323b950b50dda19f5c15d76e4984c65152e43df36489ec8b5dd09a1d28"
+    },
+    {
+      "path": "data/crossdocked_v1.1_rmsd1.0_pocket10_processed_final.lmdb",
+      "size": 4065538048,
+      "sha256": "90e3399529420f2ecb74bc47744f10291e27fc20a325545180d7f9ba52fec68f"
+    },
+    {
+      "path": "data/test_set.tar.gz",
+      "size": 38372873,
+      "sha256": "c93289d4b1522f168872d53cd927bf3982e721a93cd5978bdb574a845ae3d71b"
+    }
   ]
 }

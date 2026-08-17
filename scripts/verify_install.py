@@ -29,7 +29,7 @@ def verify_manifest(root: Path) -> tuple[int, int]:
     manifest = json.loads((root / "artifacts.json").read_text())
     checked = 0
     missing = 0
-    for group in ("model_repo_files", "dataset_repo_files"):
+    for group in ("model_repo_files", "dataset_repo_files", "crossdocked_repo_files"):
         for item in manifest[group]:
             path = root / item["path"]
             if not path.is_file():

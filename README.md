@@ -20,9 +20,8 @@ huggingface/   model and dataset cards
 artifacts.json expected artifact sizes and SHA-256 checksums
 ```
 
-Large checkpoints and the trajectory bank are hosted separately on Hugging
-Face. The full CrossDocked2020 data follows the original PAFlow download route
-and is not duplicated in this repository.
+Large checkpoints, the trajectory bank, and the PAFlow-ready CrossDocked
+pocket10 data are hosted separately on Hugging Face.
 
 ## 1. Environment
 
@@ -40,7 +39,7 @@ The exact environment snapshot from the development machine is retained as
 ```bash
 export HF_MODEL_REPO=YOUR_HF_USERNAME/LandFlow
 export HF_DATA_REPO=YOUR_HF_USERNAME/LandFlow-data
-python scripts/download_artifacts.py
+python scripts/download_artifacts.py --include-crossdocked --extract-test-set
 ```
 
 This restores the following files:
@@ -53,16 +52,15 @@ artifacts/trajectory_bank.pt
 data/crossdocked_pocket10_pose_split.pt
 data/atom_num_dataset.pkl
 data/reference_metrics.pt
-```
-
-Then download the processed CrossDocked data and test receptor files using the
-[original PAFlow instructions](https://github.com/CMACH508/PAFlow). The final
-layout must include:
-
-```text
+data/crossdocked_pocket10_with_protein.tar.gz
 data/crossdocked_v1.1_rmsd1.0_pocket10_processed_final.lmdb
+data/test_set.tar.gz
 data/test_set/
 ```
+
+The 3.4 GB pocket source archive is retained for preprocessing reproducibility
+and expands to about 15 GB. It is not extracted by default because sampling and
+evaluation use the LMDB and `data/test_set/` directly.
 
 ## 3. Verify the installation
 

@@ -5,7 +5,8 @@
 - access to the private GitHub repository;
 - read access to the private Hugging Face model and dataset repositories;
 - access to a Linux GPU node with CUDA 12.1-compatible drivers;
-- the processed CrossDocked2020 data from the original PAFlow source;
+- at least 10 GB of local disk for the standard handoff, or about 25 GB if the
+  compressed pocket10 source archive is also extracted;
 - a Slurm account/partition only if the local cluster uses Slurm.
 
 No GitHub or Hugging Face token should be stored in this repository. Each user
@@ -19,7 +20,7 @@ conda activate landflow
 export HF_MODEL_REPO=OWNER/LandFlow
 export HF_DATA_REPO=OWNER/LandFlow-data
 hf auth login
-python scripts/download_artifacts.py
+python scripts/download_artifacts.py --include-crossdocked --extract-test-set
 python scripts/verify_install.py --require-crossdocked
 EPOCHS=1 MAX_TRAIN_BATCHES=2 VAL_MAX_BATCHES=2 \
   OUTPUT_DIR=outputs/training_smoke bash workflows/03_train_potential.sh
@@ -60,7 +61,8 @@ runtimes in the repository after the first clean rerun.
 
 - protect the default branch;
 - add the junior maintainer with Write access;
-- keep model and dataset repositories private until licensing is resolved;
+- keep the repositories private until the PAFlow code and checkpoint
+  redistribution terms are resolved; CrossDocked2020 itself is CC0 1.0;
 - enable Git LFS/Xet through Hugging Face for checkpoint and bank files;
 - create a tagged release only after the one-pocket and full100 checks pass;
 - record the Git commit and artifact SHA-256 values used for every paper result.

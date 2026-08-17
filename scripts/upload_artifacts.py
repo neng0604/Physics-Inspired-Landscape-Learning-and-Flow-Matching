@@ -39,6 +39,17 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=os.environ.get("LANDFLOW_BANK_SOURCE"),
     )
+    parser.add_argument(
+        "--crossdocked-root",
+        type=Path,
+        default=os.environ.get("CROSSDOCKED_SOURCE_ROOT"),
+        help="Directory containing the three packaged CrossDocked files.",
+    )
+    parser.add_argument(
+        "--include-crossdocked",
+        action="store_true",
+        help="Upload the packaged CrossDocked files to the dataset repository.",
+    )
     parser.add_argument("--public", action="store_true", help="Create public repositories.")
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
@@ -58,10 +69,28 @@ def main() -> None:
         "data/atom_num_dataset.pkl": source_root / "data/atom_num_dataset.pkl",
         "data/reference_metrics.pt": source_root / "data/reference_metrics.pt",
     }
+    if args.include_crossdocked:
+        crossdocked_root = (
+            args.crossdocked_root.resolve()
+            if args.crossdocked_root
+            else source_root / "data"
+        )
+        sources.update(
+            {
+                "data/crossdocked_pocket10_with_protein.tar.gz": (
+                    crossdocked_root / "crossdocked_pocket10_with_protein.tar.gz"
+                ),
+                "data/crossdocked_v1.1_rmsd1.0_pocket10_processed_final.lmdb": (
+                    crossdocked_root
+                    / "crossdocked_v1.1_rmsd1.0_pocket10_processed_final.lmdb"
+                ),
+                "data/test_set.tar.gz": crossdocked_root / "test_set.tar.gz",
+            }
+        )
     manifest = json.loads((PROJECT_ROOT / "artifacts.json").read_text())
     entries = {
         item["path"]: item
-        for group in ("model_repo_files", "dataset_repo_files")
+        for group in ("model_repo_files", "dataset_repo_files", "crossdocked_repo_files")
         for item in manifest[group]
     }
     for path_in_repo, source in sources.items():
@@ -95,6 +124,13 @@ def main() -> None:
         repo_id=args.data_repo,
         repo_type="dataset",
     )
+    if args.include_crossdocked:
+        api.upload_file(
+            path_or_fileobj=PROJECT_ROOT / "third_party/CrossDocked2020_LICENSE.txt",
+            path_in_repo="data/CrossDocked2020_LICENSE.txt",
+            repo_id=args.data_repo,
+            repo_type="dataset",
+        )
     for path_in_repo, source in sources.items():
         repo_id = args.model_repo if path_in_repo in {
             item["path"] for item in manifest["model_repo_files"]

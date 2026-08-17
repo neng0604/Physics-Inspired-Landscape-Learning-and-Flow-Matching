@@ -18,8 +18,8 @@ Exact byte sizes and SHA-256 values are recorded in `artifacts.json`.
 
 - model repository: frozen PAFlow, atom-number predictor, LandFlow potential;
 - dataset repository: 3,000-trajectory bank, fixed split, atom-number metadata,
-  and reference metric cache;
-- external download: processed CrossDocked LMDB and test receptor files.
+  reference metric cache, processed CrossDocked LMDB, compressed test set, and
+  compressed pocket10 source files.
 
 Generated results, logs, caches, and environment-specific paths are excluded
 from GitHub by `.gitignore`.
