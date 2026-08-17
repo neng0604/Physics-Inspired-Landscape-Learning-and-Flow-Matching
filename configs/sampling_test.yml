@@ -1,0 +1,20 @@
+data:
+  path: ./data/crossdocked_v1.1_rmsd1.0_pocket10
+  split: ./data/crossdocked_pocket10_pose_split.pt
+  subset: test
+
+model:
+  checkpoint: ./pretrained_models/pretrained_flow.pt
+  atom_predictor_ckpt: ./pretrained_models/atom_num_model.pt
+
+sample:
+  seed: 2021
+  num_samples: 10
+  num_steps: 50
+  pos_only: False
+  center_pos_mode: protein
+  sample_num_atoms: predict
+  num_atoms_std: 0.01
+
+output:
+  result_path: ./results_landscape/test

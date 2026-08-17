@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.ruff_cache/
+.idea/
+.vscode/
+
+# Downloaded datasets and checkpoints live on Hugging Face, not GitHub.
+artifacts/
+checkpoints/
+pretrained_models/
+data/
+results/
+outputs/
+logs/
+
+# Local authentication and environment files.
+.env
+.env.*
+!.env.example
+wandb/
