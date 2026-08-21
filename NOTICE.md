@@ -12,7 +12,7 @@ prepared, the upstream PAFlow repository did not contain a LICENSE file.
 Public redistribution therefore requires confirmation from the upstream
 authors or another documented legal basis.
 
-CrossDocked2020 data is not committed to GitHub. The private Hugging Face
-dataset repository contains the PAFlow-ready pocket10 source archive, processed
+CrossDocked2020 data is not committed to GitHub. The public Hugging Face dataset
+repository contains the PAFlow-ready pocket10 source archive, processed
 LMDB, and test receptor files under the dataset's CC0 1.0 terms. The official
 full CrossDocked2020 release remains available from its original distribution.

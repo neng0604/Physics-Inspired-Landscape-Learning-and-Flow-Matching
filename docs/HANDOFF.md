@@ -3,23 +3,22 @@
 ## What a new maintainer should receive
 
 - access to the private GitHub repository;
-- read access to the private Hugging Face model and dataset repositories;
+- the public Hugging Face model and dataset repositories;
 - access to a Linux GPU node with CUDA 12.1-compatible drivers;
 - at least 10 GB of local disk for the standard handoff, or about 25 GB if the
   compressed pocket10 source archive is also extracted;
 - a Slurm account/partition only if the local cluster uses Slurm.
 
-No GitHub or Hugging Face token should be stored in this repository. Each user
-logs in with their own account and receives repository access from the owner.
+No GitHub or Hugging Face token should be stored in this repository. Hugging
+Face authentication is optional for these public artifacts.
 
 ## Recommended first-day check
 
 ```bash
 conda env create -f environment.yml
 conda activate landflow
-export HF_MODEL_REPO=OWNER/LandFlow
-export HF_DATA_REPO=OWNER/LandFlow-data
-hf auth login
+export HF_MODEL_REPO=NYCU-MLLab/LandFlow
+export HF_DATA_REPO=NYCU-MLLab/LandFlow-data
 python scripts/download_artifacts.py --include-crossdocked --extract-test-set
 python scripts/verify_install.py --require-crossdocked
 EPOCHS=1 MAX_TRAIN_BATCHES=2 VAL_MAX_BATCHES=2 \
@@ -61,8 +60,8 @@ runtimes in the repository after the first clean rerun.
 
 - protect the default branch;
 - add the junior maintainer with Write access;
-- keep the repositories private until the PAFlow code and checkpoint
-  redistribution terms are resolved; CrossDocked2020 itself is CC0 1.0;
+- confirm PAFlow code and checkpoint redistribution terms before changing the
+  release scope; CrossDocked2020 itself is CC0 1.0;
 - enable Git LFS/Xet through Hugging Face for checkpoint and bank files;
 - create a tagged release only after the one-pocket and full100 checks pass;
 - record the Git commit and artifact SHA-256 values used for every paper result.

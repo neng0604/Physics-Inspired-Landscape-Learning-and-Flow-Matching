@@ -138,5 +138,6 @@ the handoff checklist.
 
 This repository contains modifications built on PAFlow. The upstream PAFlow
 repository did not include a license when this handoff package was prepared.
-Keep this repository and its Hugging Face artifacts private until redistribution
-permission and an appropriate project license are confirmed.
+The Hugging Face artifacts are publicly available under the owner's release
+decision, but permission and an appropriate project license should still be
+confirmed before redistributing PAFlow-derived code or checkpoints elsewhere.
